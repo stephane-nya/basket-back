@@ -23,7 +23,6 @@ const makeUsersroutes = ({ app }) => {
       res.send("IT WORKED");
     }
   );
-  app.post("/users", async (req, res) => {});
   app.get("/users", async (req, res) => {});
   app.patch("/users", async (req, res) => {});
   app.delete("/users", async (req, res) => {});

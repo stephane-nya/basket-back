@@ -8,11 +8,12 @@ const app = express();
 const db = knex(config.db);
 
 app.use(cors());
+app.use(express.json());
+
 // users
 makeUsersroutes({ app });
 // posts
 // comments
-app.use(express.json());
 
 app.listen(config.server.port, () =>
   // eslint-disable-next-line no-console
