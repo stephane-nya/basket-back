@@ -13,9 +13,10 @@ export const validateUsername = yup
   .min(2)
   .max(15)
   .matches(
-    /ˆ[a-z][a-z0-9._]{1,14}$/,
+    /^[a-z][a-z0-9._]*/,
     "Username must contain only letters, numbers, '.' and '_' "
   )
+  .trim()
   .label("Username");
 
 export const validateDisplayName = yup
@@ -23,5 +24,5 @@ export const validateDisplayName = yup
   .min()
   .max()
   .trim()
-  .matches(/[ˆ\n\r\u00a0]/)
+  .matches(/[^\n\r\u00a0]/)
   .label("DisplayName");
