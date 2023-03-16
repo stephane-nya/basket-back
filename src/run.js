@@ -10,10 +10,7 @@ const db = knex(config.db);
 app.use(cors());
 app.use(express.json());
 
-// users
-makeUsersroutes({ app });
-// posts
-// comments
+makeUsersroutes({ app, db });
 
 app.listen(config.server.port, () =>
   // eslint-disable-next-line no-console

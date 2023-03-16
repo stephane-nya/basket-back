@@ -21,8 +21,8 @@ export const validateUsername = yup
 
 export const validateDisplayName = yup
   .string()
-  .min()
-  .max()
+  .min(1)
+  .max(20)
   .trim()
   .matches(/[^\n\r\u00a0]/)
   .label("DisplayName");

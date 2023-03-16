@@ -6,7 +6,7 @@ import {
   validateUsername,
 } from "../validator.js";
 
-const makeUsersroutes = ({ app }) => {
+const makeUsersroutes = ({ app, db }) => {
   app.post(
     "/users",
     validate({
@@ -18,9 +18,17 @@ const makeUsersroutes = ({ app }) => {
     async (req, res) => {
       const { email, password, username, displayName } = req.body;
 
-      console.log("WORKS");
+      const [user] = await db("users")
+        .insert({
+          email,
+          passwordHash: password, // TODO-Hash
+          passwordSalt: password, // TODO-Hash
+          username,
+          displayName,
+        })
+        .returning("*");
 
-      res.send("IT WORKED");
+      res.send(user); // TODO never send password even Hash!!!
     }
   );
   app.get("/users", async (req, res) => {});

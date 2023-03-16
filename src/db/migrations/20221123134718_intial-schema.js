@@ -5,6 +5,7 @@ export const up = async (knex) => {
     table.text("passwordHash").notNullable();
     table.text("passwordSalt").notNullable();
     table.text("displayName").notNullable();
+    table.text("username").notNullable();
     table.timestamps(true, true, true);
   });
   await knex.schema.createTable("comments", (table) => {
@@ -16,5 +17,6 @@ export const up = async (knex) => {
 };
 
 export const down = async (knex) => {
+  await knex.schema.dropTable("comments");
   await knex.schema.dropTable("users");
 };
