@@ -26,3 +26,5 @@ export const validateDisplayName = yup
   .trim()
   .matches(/[^\n\r\u00a0]/)
   .label("DisplayName");
+
+export const validatePage = yup.number().min(0).integer();

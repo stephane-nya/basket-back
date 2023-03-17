@@ -2,18 +2,22 @@ import validate from "../midellewares/validate.js";
 import {
   validateDisplayName,
   validateEmail,
+  validatePage,
   validatePassword,
   validateUsername,
 } from "../validator.js";
 
 const makeUsersroutes = ({ app, db }) => {
+  // CREATE
   app.post(
     "/users",
     validate({
-      email: validateEmail.required(),
-      password: validatePassword.required(),
-      username: validateUsername.required(),
-      displayName: validateDisplayName.required(),
+      body: {
+        email: validateEmail.required(),
+        password: validatePassword.required(),
+        username: validateUsername.required(),
+        displayName: validateDisplayName.required(),
+      },
     }),
     async (req, res) => {
       const { email, password, username, displayName } = req.body;
@@ -31,7 +35,21 @@ const makeUsersroutes = ({ app, db }) => {
       res.send(user); // TODO never send password even Hash!!!
     }
   );
-  app.get("/users", async (req, res) => {});
+  // READ COLLECTION
+  app.get(
+    "/users",
+    validate({
+      query: {
+        page: validatePage.default(0),
+      },
+    }),
+    async (req, res) => {
+      const { page } = req.query;
+      const users = await db("users");
+
+      res.send(users);
+    }
+  );
   app.patch("/users", async (req, res) => {});
   app.delete("/users", async (req, res) => {});
 };
