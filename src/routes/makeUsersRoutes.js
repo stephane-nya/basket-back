@@ -1,3 +1,4 @@
+import config from "../config.js";
 import validate from "../midellewares/validate.js";
 import {
   validateDisplayName,
@@ -7,7 +8,7 @@ import {
   validateUsername,
 } from "../validator.js";
 
-const makeUsersroutes = ({ app, db }) => {
+const makeUsersroutes = ({ app, db, config }) => {
   // CREATE
   app.post(
     "/users",
@@ -45,7 +46,9 @@ const makeUsersroutes = ({ app, db }) => {
     }),
     async (req, res) => {
       const { page } = req.query;
-      const users = await db("users");
+      const users = await db("users")
+        .limit(config.resultPerpage)
+        .offset(page * config.resultPerPage);
 
       res.send(users);
     }

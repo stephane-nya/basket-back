@@ -12,6 +12,7 @@ const config = {
   server: {
     port: process.env.SERVER_PORT,
   },
+  resultsPerPage: 10,
   db: {
     client: "pg",
     connection: {
