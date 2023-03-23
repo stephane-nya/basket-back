@@ -1,9 +1,9 @@
-import config from "../config.js";
 import validate from "../midellewares/validate.js";
 import {
   validateDisplayName,
   validateEmail,
-  validatePage,
+  validateLimit,
+  validateOffset,
   validatePassword,
   validateUsername,
 } from "../validator.js";
@@ -41,14 +41,15 @@ const makeUsersroutes = ({ app, db, config }) => {
     "/users",
     validate({
       query: {
-        page: validatePage.default(0),
+        offset: validateOffset,
+        limit: validateLimit,
       },
     }),
     async (req, res) => {
-      const { page } = req.query;
+      const { offset, limit } = req.query;
       const users = await db("users")
-        .limit(config.resultPerpage)
-        .offset(page * config.resultPerPage);
+        .limit(limit)
+        .offset(offset * limit);
 
       res.send(users);
     }

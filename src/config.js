@@ -12,7 +12,16 @@ const config = {
   server: {
     port: process.env.SERVER_PORT,
   },
-  resultsPerPage: 10,
+  view: {
+    results: {
+      minLimit: 1,
+      maxLimit: 20,
+      defaultLimit: 10,
+
+      resultsPerPage: 10,
+    },
+  },
+
   db: {
     client: "pg",
     connection: {

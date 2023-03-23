@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import config from "./config.js";
 
 export const validateEmail = yup.string().email().trim().label("E-mail");
 
@@ -28,3 +29,12 @@ export const validateDisplayName = yup
   .label("DisplayName");
 
 export const validatePage = yup.number().min(0).integer();
+
+export const validateLimit = yup
+  .number()
+  .min(config.view.results.minLimit)
+  .max(config.view.results.maxLimit)
+  .integer()
+  .default(config.view.results.defaultLimit);
+
+export const validateOffset = yup.number().min(0).integer().default(0);
