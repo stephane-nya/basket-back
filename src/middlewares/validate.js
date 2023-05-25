@@ -8,12 +8,9 @@ const validate = (validators) => async (req, res, next) => {
   });
 
   try {
-    const { params, query, body } = await validationSchema.validate(
-      { body: req.body, query: req.query, params: req.params },
-      {
-        abortEarly: false,
-      }
-    );
+    const { params, query, body } = await validationSchema.validate(req, {
+      abortEarly: false,
+    });
 
     req.params = params;
     req.query = query;

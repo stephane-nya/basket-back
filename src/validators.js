@@ -1,13 +1,13 @@
-import * as yup from "yup";
-import config from "./config.js";
+import * as yup from "yup"
+import config from "./config.js"
 
-export const validateEmail = yup.string().email().trim().label("E-mail");
+export const validateEmail = yup.string().email().trim().label("E-mail")
 
 export const validatePassword = yup
   .string()
   .min(8)
   .matches(/\w/, "Password must contain at least a special character")
-  .label("Password");
+  .label("Password")
 
 export const validateUsername = yup
   .string()
@@ -18,7 +18,7 @@ export const validateUsername = yup
     "Username must contain only letters, numbers, '.' and '_' "
   )
   .trim()
-  .label("Username");
+  .label("Username")
 
 export const validateDisplayName = yup
   .string()
@@ -26,15 +26,17 @@ export const validateDisplayName = yup
   .max(20)
   .trim()
   .matches(/[^\n\r\u00a0]/)
-  .label("DisplayName");
+  .label("DisplayName")
 
-export const validatePage = yup.number().min(0).integer();
+export const validatePage = yup.number().min(0).integer()
 
 export const validateLimit = yup
   .number()
   .min(config.view.results.minLimit)
   .max(config.view.results.maxLimit)
   .integer()
-  .default(config.view.results.defaultLimit);
+  .default(config.view.results.defaultLimit)
 
-export const validateOffset = yup.number().min(0).integer().default(0);
+export const validateOffset = yup.number().min(0).integer().default(0)
+
+export const validateId = yup.number().integer().min(1).label("User ID")
