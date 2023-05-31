@@ -59,17 +59,17 @@
 // };
 // export default makeUsersroutes;
 
-import User from "../db/models/User.js";
-import filterDBResult from "../filterDBResult.js";
-import hashPassword from "../hashPassword.js";
-import validate from "../middlewares/validate.js";
+import User from "../db/models/User.js"
+import filterDBResult from "../filterDBResult.js"
+import hashPassword from "../hashPassword.js"
+import validate from "../middlewares/validate.js"
 import {
   validateId,
   validateEmail,
   validatePassword,
   validateDisplayName,
   validateUsername,
-} from "../validators.js";
+} from "../validators.js"
 
 const makeUsersRoutes = ({ app }) => {
   // CREATE
@@ -84,9 +84,9 @@ const makeUsersRoutes = ({ app }) => {
       },
     }),
     async (req, res) => {
-      const { email, password, displayName, username } = req.body;
+      const { email, password, displayName, username } = req.body
 
-      const [passwordHash, passwordSalt] = hashPassword(password);
+      const [passwordHash, passwordSalt] = hashPassword(password)
 
       const user = await User.query()
         .insert({
@@ -96,11 +96,11 @@ const makeUsersRoutes = ({ app }) => {
           displayName,
           username,
         })
-        .returning("*");
+        .returning("*")
 
-      res.send({ result: filterDBResult([user]), count: 1 });
+      res.send({ result: filterDBResult([user]), count: 1 })
     }
-  );
-};
+  )
+}
 
-export default makeUsersRoutes;
+export default makeUsersRoutes
