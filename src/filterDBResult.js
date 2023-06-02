@@ -5,7 +5,7 @@ const hiddenFields = [
   "role",
   "createdAt",
   "updatedAt",
-];
+]
 
 const filterDBResult = (rows) =>
   rows.map((row) =>
@@ -18,16 +18,16 @@ const filterDBResult = (rows) =>
             ["string", "number", "boolean"].includes(typeof value) ||
             !value
           ) {
-            return [field, value];
+            return [field, value]
           }
 
           if (Array.isArray(value)) {
-            return [field, filterDBResult(value)];
+            return [field, filterDBResult(value)]
           }
 
-          return [field, ...filterDBResult([value])];
+          return [field, ...filterDBResult([value])]
         })
     )
-  );
+  )
 
-export default filterDBResult;
+export default filterDBResult
