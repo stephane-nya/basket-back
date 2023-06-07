@@ -1,14 +1,6 @@
-import "dotenv/config";
+import "dotenv/config"
 
 const config = {
-  security: {
-    password: {
-      iterations: 100000,
-      keylen: 256,
-      digest: "sha512",
-      pepper: process.env.SECURITY_PASSWORD_PEPPER,
-    },
-  },
   server: {
     port: process.env.SERVER_PORT,
   },
@@ -17,11 +9,8 @@ const config = {
       minLimit: 1,
       maxLimit: 20,
       defaultLimit: 10,
-
-      resultsPerPage: 10,
     },
   },
-
   db: {
     client: "pg",
     connection: {
@@ -33,6 +22,19 @@ const config = {
       stub: "./src/db/migration.stub",
     },
   },
-};
+  security: {
+    uploadDirectory: process.env.TMPDIR,
+    password: {
+      iterations: 100000,
+      keylen: 256,
+      digest: "sha512",
+      pepper: process.env.SECURITY_PASSWORD_PEPPER,
+    },
+    jwt: {
+      expiresIn: "2 days",
+      secret: process.env.SECURITY_JWT_SECRET,
+    },
+  },
+}
 
-export default config;
+export default config
